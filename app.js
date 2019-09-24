@@ -8,7 +8,7 @@ mercadopago.configure({
   access_token: keys.MP_ACCESS_TOKEN
 });
 
-const host = process.env.HOST || 'http://localhost:3000';
+var host = process.env.HOST || 'http://localhost:3000';
 
 var app = express();
 
@@ -43,6 +43,7 @@ app.get('/detail', function (req, res) {
       res.json({'error': 'Falta la imagen de la unidad' });
   }
   console.log(req.query.img);
+  console.log(host);
   // Crea un objeto de preferencia
   let preference = {
       items: [
