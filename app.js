@@ -133,6 +133,38 @@ app.get('/failure', function(req, res) {
   res.render('failure');
 });
 
+app.post('/process-payment', function(req, res) {
+  console.log(req.body);
+
+  const payment_id = req.body.payment_id;
+  const merchant_order_id = req.body.merchant_order_id;
+  const status = req.body.payment_status;
+
+  switch (status) {
+    case 'approved':
+      res.render('success', {
+        payment_id: payment_id,
+        merchant_order_id: merchant_order_id
+      });
+      break;
+    case 'pending':  
+      res.render('success', {
+        payment_id: payment_id,
+        merchant_order_id: merchant_order_id
+      });
+      break;
+    case 'error':
+      res.render('success', {
+        payment_id: payment_id,
+        merchant_order_id: merchant_order_id
+      });
+      break;
+    default:
+      res.status(404).json({error: 'Faltan los parametros de POST'});
+      break;
+  }
+});
+
 app.use(express.static('assets'));
  
 app.use('/assets', express.static(__dirname + '/assets'));
